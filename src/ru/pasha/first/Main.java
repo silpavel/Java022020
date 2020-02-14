@@ -4,16 +4,16 @@ import java.util.Arrays;
 import static java.lang.System.*;
 
 public class Main {
-
     public static void main(String[] args) {
-        Matrix m1=new Matrix(2,2);
-        m1.matrix=new double[][]{{1,2},{3,4}};
-        Matrix m2=new Matrix(2,2);
-        m2.matrix=new double[][]{{2,1},{4,3}};
-        out.println(m1);
-        out.println(m2);
-        out.println(m1.sum(m2));
-        out.println(m1.muxN(2));
+        Animal[] animals=new Animal[5];
+        animals[0]=new Dog("Bob","meat","village",7);
+        animals[1]=new Cat("Vasay","milk","home",1.7);
+        animals[2]=new Horse("Dunkan","weat","garage",20.7f);
+        animals[3]=new Cat("Kiska","milk","home",1.9);
+        animals[4]=new Cat("Murka","meat","home",2.7);
+        for (Animal animal : animals) {
+            DrDulittle.treatAnimal(animal);
+        }
 
     }
 }
@@ -142,4 +142,156 @@ class Matrix{
                 '}';
     }
 }
+class Reader{
+    //methods
+    void takeBook(int i){
+        out.println(name+" have "+i+" book(s)");
+    }
+    void takeBook(String...books){
+        out.println(name+" have books: "+Arrays.toString(books));
+    }
+
+    void returnBook(){}
+    // private
+    private String name;
+    private int ticket;
+    private String faculty;
+    private String birthday;
+    private String phone;
+ }
+class Books{
+    private String name;
+    private String autor;
+ }
+class Student{
+    protected String name, group;
+    protected double averageRating;
+    int getScholarship(){
+        return averageRating==5 ? 100 : 80;
+    }
+    public Student(String name, String group, double averageRating) {
+        this.name = name;
+        this.group = group;
+        this.averageRating = averageRating;
+    }
+}
+class Aspirant extends Student{
+    private String scientificWork;
+    @Override
+    int getScholarship() {
+        return averageRating==5 ? 200 : 180;
+    }
+    public Aspirant(String name, String group,
+                    double averageRating, String scientificWork) {
+        super(name, group, averageRating);
+        this.scientificWork = scientificWork;
+    }
+}
+// let's image one package
+class Car{
+    String make;
+    String level;
+    int weight;
+    Driver driver;
+    Engine engine;
+    void start(){out.println("start");}
+    void stop(){out.println("stop");}
+    void turnRight(){out.println("turn right");}
+    void turnLeft(){out.println("turn left");}
+    void printInfo(){
+       out.println(this.toString());
+    }
+    @Override
+    public String toString() {
+        return "Car{" +
+                "make='" + make + '\'' +
+                ", level='" + level + '\'' +
+                ", weight=" + weight +
+                ", driver=" + driver.toString() +
+                ", engine=" + engine.toString() +
+                '}';
+    }
+}
+class Engine{
+    String vender;
+    int power;
+    @Override
+    public String toString() {
+        return "Engine{" +
+                "vender='" + vender + '\'' +
+                ", power=" + power +
+                '}';
+    }
+}
+class Driver{
+    String name;
+    int drivingExperience;
+    @Override
+    public String toString() {
+        return "Driver{" +
+                "name='" + name + '\'' +
+                ", drivingExperience=" + drivingExperience +
+                '}';
+    }
+}
+class Lorry extends Car{
+    int bearingCapacity;
+}
+class SportCar extends Car{
+    int limitSpeed;
+}
+// other block
+abstract class Animal{
+    String name, food, location;
+    abstract void makeNoise();
+    abstract void eat();
+    void sleep(){};
+    public Animal(String name, String food, String location) {
+        this.name = name;
+        this.food = food;
+        this.location = location;
+    }
+}
+class Dog extends Animal{
+    int i;
+    @Override
+    void makeNoise(){}
+    @Override
+    void eat(){}
+    public Dog(String name, String food, String location, int i) {
+        super(name, food, location);
+        this.i = i;
+    }
+}
+class Cat extends Animal{
+    double d;
+    @Override
+    void makeNoise(){}
+    @Override
+    void eat(){}
+    public Cat(String name, String food, String location, double d) {
+        super(name, food, location);
+        this.d = d;
+    }
+}
+class Horse extends Animal{
+    float f;
+    @Override
+    void makeNoise(){}
+    @Override
+    void eat(){}
+    public Horse(String name, String food, String location, float f) {
+        super(name, food, location);
+        this.f = f;
+    }
+}
+class DrDulittle{
+    static void treatAnimal(Animal animal){
+        out.println("animal= "+ animal.getClass().getSimpleName()+ ", food= "+animal.food+"," +
+                " location= "+animal.location);
+    }
+}
+
+
+
 
