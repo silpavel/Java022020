@@ -1,19 +1,23 @@
 package ru.pasha.first;
-import java.util.Arrays;
+import java.util.*;
 
 import static java.lang.System.*;
 
 public class Main {
     public static void main(String[] args) {
-        Animal[] animals=new Animal[5];
-        animals[0]=new Dog("Bob","meat","village",7);
-        animals[1]=new Cat("Vasay","milk","home",1.7);
-        animals[2]=new Horse("Dunkan","weat","garage",20.7f);
-        animals[3]=new Cat("Kiska","milk","home",1.9);
-        animals[4]=new Cat("Murka","meat","home",2.7);
-        for (Animal animal : animals) {
-            DrDulittle.treatAnimal(animal);
-        }
+        StrArr sar=new StrArr(5);
+        sar.setString("alpha",0);
+        sar.setString("betta",1);
+        sar.setString("gamma",2);
+        sar.setString("alpha",3);
+        sar.setString("gamma",4);
+        out.println(sar.toString());
+        sar.uniq();
+        out.println(sar.toString());
+
+
+
+
 
     }
 }
@@ -289,6 +293,53 @@ class DrDulittle{
     static void treatAnimal(Animal animal){
         out.println("animal= "+ animal.getClass().getSimpleName()+ ", food= "+animal.food+"," +
                 " location= "+animal.location);
+    }
+}
+class StrArr{
+    private String[] str;
+    public StrArr(int length) {
+        this.str = new String[length];
+    }
+    String getStringAt(int i){
+        if(i<0 || i>=str.length) return "";
+        return new String(str[i]);
+    }
+    void setString(String s, int index){
+        if(index<0 || index>=str.length) return;
+        str[index]=new String(s);
+    }
+    public StrArr append(StrArr sar){
+        if(sar==null) return this;
+        StrArr resault=new StrArr(str.length+sar.str.length);
+        for(int i=0;i<str.length;i++)
+            resault.str[i]=str[i];
+        for (int i = 0; i <sar.str.length ; i++) {
+            resault.str[i+str.length]=sar.str[i];
+        }
+        return resault;
+    }
+    @Override
+    public String toString() {
+        return "StrArr{" +
+                "str=" + Arrays.toString(str) +
+                '}';
+    }
+    public void uniq(){
+        /*
+        String[] buf=new String[str.length];
+        int position=-1;
+        for(int i=0;i<str.length;i++){
+            boolean isUniq=true;
+            for(int j=0;j<=position && isUniq;j++){
+                if(str[i].equals(buf[j])) isUniq=false;
+            }
+            if(isUniq) buf[++position]=str[i];
+        }
+        str=Arrays.copyOfRange(buf,0,position+1);
+        */
+        Set<String> set=new HashSet(Arrays.asList(str));
+        set.toArray( str= new String[set.size()] );
+
     }
 }
 
